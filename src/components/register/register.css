@@ -1,0 +1,9 @@
+.account-form {
+    margin-top: 10%;
+    max-width: 35rem;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.container {
+    margin-top: 5%;
+}
