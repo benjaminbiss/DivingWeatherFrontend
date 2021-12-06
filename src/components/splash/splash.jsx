@@ -5,16 +5,9 @@ import MapContainer from '../MapContainer/MapContainer';
 
 const Splash = (props) => {
 
-    useEffect(() => {
-
-    }, []);
-
-
-
-
     return ( 
         <div>
-            <NavBar />
+            <NavBar user={props.user}/>
             <div className="map_containter">
                 <MapContainer />
             </div>

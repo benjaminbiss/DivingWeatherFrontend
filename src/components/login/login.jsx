@@ -21,6 +21,7 @@ const LogIn = (props) => {
         console.log(response.data);
         const token = response.data;
         localStorage.setItem('token', token);
+        props.userLogged();
         if (response) {
             navigate("/");
         }

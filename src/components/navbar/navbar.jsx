@@ -1,10 +1,11 @@
 import React from 'react';
 
 const NavBar = (props) => {
+  const user = props.user;
     return ( 
 <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
   <div className="container-fluid">
-    <a className="navbar-brand" href="#">Dive Planner</a>
+    <a className="navbar-brand" href="/">Dive Planner</a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -34,16 +35,22 @@ const NavBar = (props) => {
             <span className="visually-hidden">(current)</span>
           </a>
         </li>
+
+        {user ? 
+        <li className="nav-item">
+          <a className="nav-link" href="/user">{user.username}</a>
+        </li>
+        : 
         <li className="nav-item">
         <a className="nav-link" href="/register">Register
             <span className="visually-hidden">(current)</span>
           </a>
-        </li>
+        </li>}
       </ul>
-      <form className="d-flex">
+      {/* <form className="d-flex">
         <input className="form-control me-sm-2" type="text" placeholder="Search" />
         <button className="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      </form> */}
     </div>
   </div>
 </nav>
