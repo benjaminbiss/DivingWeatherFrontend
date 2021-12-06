@@ -20,7 +20,7 @@ const NavBar = (props) => {
         <li className="nav-item">
           <a className="nav-link" href="/trip">Plan a Trip</a>
         </li>
-        <li className="nav-item dropdown">
+        {/* <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
           <div className="dropdown-menu">
             <a className="dropdown-item" href="#">Action</a>
@@ -29,7 +29,7 @@ const NavBar = (props) => {
             <div className="dropdown-divider"></div>
             <a className="dropdown-item" href="#">Separated link</a>
           </div>
-        </li>
+        </li> */}
         <li className="nav-item">
         <a className="nav-link" href="/login">Login
             <span className="visually-hidden">(current)</span>

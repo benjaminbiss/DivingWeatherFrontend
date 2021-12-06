@@ -20,8 +20,7 @@ const LogIn = (props) => {
         let response = await axios.post(`http://127.0.0.1:8000/api/auth/login/`, user);
         console.log(response.data);
         const token = response.data;
-        localStorage.setItem('token', token);
-        props.userLogged();
+        localStorage.setItem('token', token.access);
         if (response) {
             navigate("/");
         }
