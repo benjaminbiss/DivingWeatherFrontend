@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from '../navbar/navbar';
+import MapContainer from '../MapContainer/MapContainer';
 
 
 const Splash = (props) => {
@@ -15,7 +16,7 @@ const Splash = (props) => {
         <div>
             <NavBar />
             <div className="map_containter">
-
+                <MapContainer />
             </div>
         </div>
      );
