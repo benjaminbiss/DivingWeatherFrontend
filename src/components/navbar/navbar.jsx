@@ -91,6 +91,9 @@ const NavBar = (props) => {
               :
               <ul className="navbar-nav me-auto">
               <li className="nav-item">
+              <a className="nav-link" href="/marker">New Map Marker</a>
+              </li>
+              <li className="nav-item">
               <a className="nav-link" href="/user">{userInfo.username}'s Profile</a>
               </li>
               <button type="button" class="btn btn-primary btn-rg" onClick={deleteJWT}>Logout</button>

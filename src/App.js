@@ -10,6 +10,7 @@ import User from './components/User/User';
 import Checklist from './components/Checklist/Checklist';
 import Trip from './components/Trip/Trip';
 import Update from './components/Update/Update';
+import Marker from './components/Marker/Marker';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
                         <Route path="/checklist" exact element={<Checklist />} />
                         <Route path="/trip" exact element={<Trip />} />
                         <Route path="/update" exact element={<Update />} />
+                        <Route path="/marker" exact element={<Marker />} />
                     </Routes>
                 </header>
             </div>
