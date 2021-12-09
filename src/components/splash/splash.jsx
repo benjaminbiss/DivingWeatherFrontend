@@ -30,7 +30,8 @@ const Splash = (props) => {
               {
                 id: i,
                 lat: parseFloat(locations[i].latitude),
-                lng: parseFloat(locations[i].longitude)
+                lng: parseFloat(locations[i].longitude),
+                name: locations[i].name
             }
           )
         }

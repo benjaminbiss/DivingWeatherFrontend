@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /src/components/MapContainer/GoogleApiWrapper.jsx
+/src/components/MapContainer/WorldWeatherWrapper.jsx
 
 # testing
 /coverage
