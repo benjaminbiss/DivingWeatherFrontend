@@ -16,13 +16,25 @@ const ChecklistView = (props) => {
                         <th scope="row">Location</th>
                         <td>Have you picked your desired diving location?</td>
                         <td>If not, use our interactive map to find a suitable location!</td>
-                        <td></td>
+                        <td><fieldset class="form-group">
+                        <legend class="mt-4"></legend>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                        </div>
+                        </fieldset>
+                        </td>
                     </tr>
                     <tr class="table-active">
                         <th scope="row">Weather</th>
                         <td>Have you read the weather report for your desired location?</td>
                         <td>If not, use our interactive map to study the weather patterns at your dive location!</td>
-                        <td></td>
+                        <td><fieldset class="form-group">
+                        <legend class="mt-4"></legend>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                        </div>
+                        </fieldset>
+                        </td>
                     </tr>
                     <tr class="table-light">
                         <th scope="row">BCD and Bouyancy</th>
@@ -31,14 +43,26 @@ const ChecklistView = (props) => {
                             Check if you’ve connected the low-pressure inflator hose correctly on your BCD and ensure a less sticky inflator button with a quick puff.
                             Make sure that your BCD deflates correctly by deflating it.
                             Make sure that you have the proper weight by checking your buoyancy. This step will only apply if you’re checking your dive equipment in the water.</td>
-                        <td></td>
+                            <td><fieldset class="form-group">
+                        <legend class="mt-4"></legend>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                        </div>
+                        </fieldset>
+                        </td>
                     </tr>
                     <tr class="table-active">
                         <th scope="row">Weights/Weight Belt</th>
                         <td>For weight belt checks, it’s best to perform the tasks listed below.</td>
                         <td>Check if your buddy is wearing their weight belt properly. Ensure that loose ends are tied correctly and tucked in such a way that enables quick release.
                             Familiarize yourself with your dive buddy’s preferred weight belt or built-in weights and how you can release them when a specific emergency calls for it.</td>
-                        <td></td>
+                            <td><fieldset class="form-group">
+                        <legend class="mt-4"></legend>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                        </div>
+                        </fieldset>
+                        </td>
                     </tr>
                     <tr class="table-light">
                         <th scope="row">Release</th>
@@ -47,7 +71,13 @@ const ChecklistView = (props) => {
                             Count the number of buckles/straps tugging at each one as you enter the water.
                             Ensure that hose or diving gear placement won’t keep you and your buddy from removing your gear in emergencies.
                             Teach your buddy how to open the release.</td>
-                        <td></td>
+                            <td><fieldset class="form-group">
+                        <legend class="mt-4"></legend>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                        </div>
+                        </fieldset>
+                        </td>
                     </tr>
                     <tr class="table-active">
                         <th scope="row">Air</th>
@@ -56,7 +86,13 @@ const ChecklistView = (props) => {
                             Make him take a couple of breaths while you watch the pressure gauge for fluctuations in the needle, or simply purge the regulator while watching the needle.
                             Make sure that you have a full tank and check if your air connectors are leaking.
                             For alternate air source checking, breathe from it a few times. You’ll also need to make sure that your buddy has clipped the source on their BCD and that you can see it while you dive.</td>
-                        <td></td>
+                            <td><fieldset class="form-group">
+                        <legend class="mt-4"></legend>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                        </div>
+                        </fieldset>
+                        </td>
                     </tr>
                     <tr class="table-light">
                         <th scope="row">Final OK</th>
@@ -66,7 +102,13 @@ const ChecklistView = (props) => {
                             Take a compass bearing.
                             Check your dive computer before giving your buddy the all-OK sign to start your dive.
                             Attach loose hoses and other dangly items (which can cause reef damage) to your suit.</td>
-                        <td></td>
+                            <td><fieldset class="form-group">
+                        <legend class="mt-4"></legend>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                        </div>
+                        </fieldset>
+                        </td>
                     </tr>
                 </thead>
             </table>
@@ -76,3 +118,4 @@ const ChecklistView = (props) => {
 }
  
 export default ChecklistView;
+
