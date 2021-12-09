@@ -96,7 +96,7 @@ const NavBar = (props) => {
               <li className="nav-item">
               <a className="nav-link" href="/user">{userInfo.username}'s Profile</a>
               </li>
-              <button type="button" class="btn btn-primary btn-rg" onClick={deleteJWT}>Logout</button>
+              <button type="button" class="btn btn-primary" onClick={deleteJWT}>Logout</button>
               </ul>}
               </ul>
           </div>
