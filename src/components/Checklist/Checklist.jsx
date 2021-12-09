@@ -1,13 +1,13 @@
 import React from 'react';
 import NavBar from '../navbar/navbar';
-import ChecklistView from './ChecklistView';
+import GenericChecklistView from './GenericCheckListView'
 import './Checklist.css'
 
 const Checklist = (props) => {
     return ( 
         <React.Fragment>
             <NavBar />
-            <ChecklistView />
+            <GenericChecklistView />
         </React.Fragment>
      );
 }

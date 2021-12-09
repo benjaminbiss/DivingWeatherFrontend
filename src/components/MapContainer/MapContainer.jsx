@@ -120,9 +120,21 @@ const MapContainer = (props) => {
                 <p></p>
                 :
                 <p>Tide Time: {diveWeather[date].tides[0].tide_data[3].tideTime}  Tide Type: {diveWeather[date].tides[0].tide_data[3].tide_type}  Tide Height:  {diveWeather[date].tides[0].tide_data[3].tideHeight_mt} meters</p>}
+                <h5>Detailed View:</h5>
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                  <div class="btn-group me-2" role="group" aria-label="First group">
+                    <button type="button" class="btn btn-secondary" onClick={() => setTime(0)}>0000</button>
+                    <button type="button" class="btn btn-secondary" onClick={() => setTime(1)}>0300</button>
+                    <button type="button" class="btn btn-secondary" onClick={() => setTime(2)}>0600</button>
+                    <button type="button" class="btn btn-secondary" onClick={() => setTime(3)}>0900</button>
+                    <button type="button" class="btn btn-secondary" onClick={() => setTime(4)}>1200</button>
+                    <button type="button" class="btn btn-secondary" onClick={() => setTime(5)}>1500</button>
+                    <button type="button" class="btn btn-secondary" onClick={() => setTime(6)}>1800</button>
+                    <button type="button" class="btn btn-secondary" onClick={() => setTime(7)}>2100</button>
+                  </div>
+                </div>
                 {diveWeather[date].hourly[time] ?
                 <React.Fragment>
-                  <h5>Detailed View: {diveWeather[date].hourly[time].time}</h5>
                   <p>Temperature-Fahrenheit: {diveWeather[date].hourly[time].tempF}  Feels Like-Fahrenheit: {diveWeather[date].hourly[time].FeelsLikeF}  Heat Index-Fahrenheit: {diveWeather[date].hourly[time].HeatIndexF}  </p>
                   <p>Wind Chill-Fahrenheit: {diveWeather[date].hourly[time].WindChillF}  Wind Gust-MPH: {diveWeather[date].hourly[time].WindGustMiles}  Cloud Cover:  {diveWeather[date].hourly[time].cloudcover}%  Humidity: {diveWeather[date].hourly[time].humidity}% </p>
                   <p>Precipitation: {diveWeather[date].hourly[time].precipInches}"  Dew Point-Fahrenheit: {diveWeather[date].hourly[time].DewPointF}  Visibility: {diveWeather[date].hourly[time].visibilityMiles} miles</p>
@@ -132,8 +144,6 @@ const MapContainer = (props) => {
                 :
                 <p></p>
                 }
-                <button type="button" class="btn btn-primary btn-sm" onClick={() => cycleTimeBack()}>Previous Time</button>
-                <button type="button" class="btn btn-primary btn-sm" onClick={() => cycleTimeForward()}>Next Time</button>
                 </div>                
               :
               <div></div>}
