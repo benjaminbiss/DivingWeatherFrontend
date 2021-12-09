@@ -9,6 +9,7 @@ import Splash from './components/splash/splash';
 import User from './components/User/User';
 import Checklist from './components/Checklist/Checklist';
 import Trip from './components/Trip/Trip';
+import Update from './components/Update/Update';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
                         <Route path="/user" exact element={<User />} />
                         <Route path="/checklist" exact element={<Checklist />} />
                         <Route path="/trip" exact element={<Trip />} />
+                        <Route path="/update" exact element={<Update />} />
                     </Routes>
                 </header>
             </div>
