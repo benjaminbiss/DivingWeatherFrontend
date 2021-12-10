@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ChecklistView from '../Checklist/ChecklistView';
 import NavBar from '../navbar/navbar';
 import axios from 'axios';
-import Checklist from '../Checklist/Checklist';
+import jwtDecode from 'jwt-decode';
+
 
 
 const Trip = (props) => {
