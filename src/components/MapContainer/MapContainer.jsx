@@ -99,7 +99,7 @@ const MapContainer = (props) => {
     width: "100%"};
 
   const defaultCenter = {
-    lat: 40.0000, lng: -100.0000
+    lat: 15.0000, lng: -100.0000
   } 
   useEffect(() =>{
 
@@ -111,7 +111,7 @@ const MapContainer = (props) => {
        googleMapsApiKey={GoogleApiWrapper}>
         <GoogleMap
           mapContainerStyle={mapStyles}
-          zoom={4}
+          zoom={3}
           center={defaultCenter}
           >
         {props.markers.map(pos => (

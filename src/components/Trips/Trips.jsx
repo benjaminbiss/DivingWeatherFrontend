@@ -79,7 +79,7 @@ const Trip = (props) => {
                 <div className="trip-container">
                 <br />
                 <div className='row'>
-                    <TripDisplay trips={trips}/>
+                    <TripDisplay trips={userTrips}/>
                 </div>
                 </div>
             </div>

@@ -59,12 +59,9 @@ const NavBar = (props) => {
           <div className="collapse navbar-collapse" id="navbarColor01">
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
-                <a className="nav-link" href="/checklist">Checklist
+                <a className="nav-link" href="/checklist">Safety Info
                   <span className="visually-hidden">(current)</span>
                 </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/trips">Plan a Trip</a>
               </li>
               {!userInfo ?
               <ul className="navbar-nav me-auto">
@@ -80,6 +77,9 @@ const NavBar = (props) => {
               </li></ul>
               :
               <ul className="navbar-nav me-auto">
+              <li className="nav-item">
+                <a className="nav-link" href="/trips">Plan a Trip</a>
+              </li>
               <li className="nav-item">
               <a className="nav-link" href="/marker">New Map Marker</a>
               </li>

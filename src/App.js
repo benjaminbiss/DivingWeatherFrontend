@@ -28,6 +28,7 @@ function App() {
                         <Route path="/update" exact element={<Update />} />
                         <Route path="/marker" exact element={<Marker />} />
                         <Route path="/trips" exact element={<Trips />} />
+                        <Route path="/trips/<int:pk>" exact element={<Trip />} />
                     </Routes>
                 </header>
             </div>

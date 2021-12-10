@@ -10,7 +10,7 @@ const Trip = (props) => {
 
     return ( 
         <div>
-            <NavBar user={props.user}/>
+            <NavBar />
             <div className="container">
                 <div className="trip-container">
                     <ChecklistView />
