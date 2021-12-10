@@ -4,6 +4,8 @@ import { GoogleApiWrapper } from './GoogleApiWrapper';
 import { WorldWeatherWrapper } from './WorldWeatherWrapper';
 import { useEffect, useState } from 'react/cjs/react.development';
 import axios from 'axios';
+import ModalForm from '../ModalForm/ModalForm';
+import jwtDecode from 'jwt-decode';
 
 const MapContainer = (props) => {
 
@@ -11,6 +13,41 @@ const MapContainer = (props) => {
   const [diveWeather, setWeather] = useState();
   const [date, setDate] = useState(0);
   const [time, setTime] = useState(0);
+  const [toggle, toggleDisplay] = useState(false);
+  const [jwt, setJWT] = useState();
+  const [user, userLogged] = useState();
+  const [userInfo, setUserInfo] = useState();
+  
+  useEffect(() => {
+      getJWT();
+  }, [])
+  useEffect(() => {
+      getUser();
+  }, [jwt])
+  useEffect(() => {
+      if (user){
+        getUserInfo();
+      }
+  }, [user])
+  
+  function getJWT() {
+      const jwt = localStorage.getItem('token');
+      setJWT(jwt);        
+  }
+  function getUser() {
+      try{
+          const user = jwtDecode(jwt);
+          userLogged(user);
+      } catch {}
+  }
+
+  const getUserInfo = async () => {
+    let pk = user.user_id;
+    const userInfo = await axios.get(`http://127.0.0.1:8000/api/auth/user/${pk}`, { headers: { Authorization: `Bearer ${jwt}` } });
+    if(userInfo) {
+        setUserInfo(userInfo.data);
+    } else {console.log('no user found')}
+  }
 
   const getWeather = async (lat, long) => {
     const weather = await axios.get(`http://api.worldweatheronline.com/premium/v1/marine.ashx?format=json&q=${lat},${long}&tide=yes&key=${WorldWeatherWrapper}`);
@@ -52,6 +89,11 @@ const MapContainer = (props) => {
     }
   }
 
+  function formDisplay() {
+    toggleDisplay(true);
+    console.log(toggle)
+}
+
   const mapStyles = {        
     height: "90vh",
     width: "100%"};
@@ -59,15 +101,19 @@ const MapContainer = (props) => {
   const defaultCenter = {
     lat: 40.0000, lng: -100.0000
   } 
+  useEffect(() =>{
+
+  }, [selectedDive])
 
   return (
+    <React.Fragment>
      <LoadScript
        googleMapsApiKey={GoogleApiWrapper}>
         <GoogleMap
           mapContainerStyle={mapStyles}
           zoom={4}
           center={defaultCenter}
-        >
+          >
         {props.markers.map(pos => (
           <Marker 
           key={pos.id}
@@ -143,14 +189,22 @@ const MapContainer = (props) => {
                 </React.Fragment>
                 :
                 <p></p>
-                }
+              }
+                <button type="button" class="btn btn-secondary" onClick={() => toggleDisplay(true)}>Plan a Trip Here</button>
                 </div>                
               :
               <div></div>}
+
             </InfoWindow>
             )}
             </GoogleMap>
             </LoadScript>
+            {selectedDive ?
+            <ModalForm toggle={toggle} toggleDisplay={toggleDisplay} location={selectedDive} user={user}/>
+            :
+            <div></div>
+            }
+            </React.Fragment>
   )
 }
 

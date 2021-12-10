@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import ChecklistView from '../Checklist/ChecklistView';
 import NavBar from '../navbar/navbar';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import TripCard from '../TripCard/TripCard';
-import Modal from '../Modal/Modal';
 import TripDisplay from '../TripDisplay/TripDisplay';
 
 
@@ -15,7 +12,6 @@ const Trip = (props) => {
     const [jwt, setJWT] = useState();
     const [user, userLogged] = useState();
     const [userInfo, setUserInfo] = useState();
-    const [toggle, toggleDisplay] = useState(false);
     
     useEffect(() => {
         getJWT();
@@ -65,16 +61,14 @@ const Trip = (props) => {
     function getUserTrips() {
         let trippy = [];
         trips.map((trip) => {
-            if(trip.diver_pk_id === user.user_id){
+            if(trip.diver_pk === user.user_id){
                 trippy.push(trip);
             } else { }
         })
         setUserTrips(trippy);
     }
 
-    function formDisplay() {
-        
-    }
+
 
 
     return ( 
@@ -83,19 +77,13 @@ const Trip = (props) => {
             <NavBar user={props.user}/>
             <div className="container">
                 <div className="trip-container">
-                    <button className="btn btn-primary">Add new Trip</button>
-                </div>
                 <br />
                 <div className='row'>
                     <TripDisplay trips={trips}/>
                 </div>
+                </div>
             </div>
         </div>
-        {toggle === true ?
-        <Modal />
-        :
-        <div></div>
-        }
         </React.Fragment>
      );
 }
