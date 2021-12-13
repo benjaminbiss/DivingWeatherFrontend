@@ -12,6 +12,7 @@ import Trip from './components/Trip/Trip';
 import Update from './components/Update/Update';
 import Marker from './components/Marker/Marker';
 import Trips from './components/Trips/Trips';
+import Forum from './components/Forum/Forum';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
                         <Route path="/marker" exact element={<Marker />} />
                         <Route path="/trips" exact element={<Trips />} />
                         <Route path="/trips/<int:pk>" exact element={<Trip />} />
+                        <Route path="/forum" exact element={<Forum />} />
                     </Routes>
                 </header>
             </div>

@@ -29,6 +29,9 @@ const MapContainer = (props) => {
         getUserInfo();
       }
   }, [user])
+  useEffect(() =>{
+    console.log(selectedDive)
+  }, [selectedDive])
   
   function getJWT() {
       const jwt = localStorage.getItem('token');
@@ -73,37 +76,18 @@ const MapContainer = (props) => {
     }
   }
 
-  function cycleTimeBack() {
-    if (time !== 0) {
-      setTime(time - 1);
-    } else {
-      setTime(7)
-    }
-  }
-
-  function cycleTimeForward() {
-    if (time !== 7) {
-      setTime(time + 1);
-    } else {
-      setTime(0)
-    }
-  }
-
-  function formDisplay() {
-    toggleDisplay(true);
-    console.log(toggle)
-}
-
   const mapStyles = {        
     height: "90vh",
     width: "100%"};
 
-  const defaultCenter = {
+  let mapCenter = selectedDive ?
+  {
+    lat: selectedDive.lat + 15,
+    lng: selectedDive.lng
+  }
+  : {
     lat: 15.0000, lng: -100.0000
-  } 
-  useEffect(() =>{
-
-  }, [selectedDive])
+  }
 
   return (
     <React.Fragment>
@@ -112,7 +96,7 @@ const MapContainer = (props) => {
         <GoogleMap
           mapContainerStyle={mapStyles}
           zoom={3}
-          center={defaultCenter}
+          center={mapCenter}
           >
         {props.markers.map(pos => (
           <Marker 

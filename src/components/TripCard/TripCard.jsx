@@ -30,7 +30,6 @@ const TripCard = (props) => {
             </div>
             <div clasclassNames="card-body">
                 <a className="card-link" onClick={() => setIsOpen(true)}>View Trip</a>
-                {/* <a class="card-link" onClick={deleteTrip}>Delete Trip</a> */}
             </div>
             <ModalChecklist isOpen={isOpen} setIsOpen={setIsOpen} trip={props.trip} />
         </div>

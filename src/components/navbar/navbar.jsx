@@ -84,6 +84,9 @@ const NavBar = (props) => {
               <a className="nav-link" href="/marker">New Map Marker</a>
               </li>
               <li className="nav-item">
+              <a className="nav-link" href="/forum">Forum</a>
+              </li>
+              <li className="nav-item">
               <a className="nav-link" href="/user">{userInfo.username}'s Profile</a>
               </li>
               <button type="button" class="btn btn-primary" onClick={deleteJWT}>Logout</button>

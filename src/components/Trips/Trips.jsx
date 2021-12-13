@@ -68,9 +68,6 @@ const Trip = (props) => {
         setUserTrips(trippy);
     }
 
-
-
-
     return ( 
         <React.Fragment>
         <div>
