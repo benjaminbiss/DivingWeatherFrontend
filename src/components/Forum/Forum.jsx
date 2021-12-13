@@ -2,23 +2,29 @@ import React, { useState, useEffect } from 'react';
 import NavBar from '../navbar/navbar';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import { Modal } from 'react-responsive-modal';
 
 const Forum = (props) => {
 
-    const [reviews, setReviews] = useState();
-    const [replies, setReplies] = useState();
-    const [users, setUsers] = useState();
+    const [reviews, setReviews] = useState([]);
+    const [replies, setReplies] = useState([]);
+    const [users, setUsers] = useState([]);
+    const [userInfo, setUserInfo] = useState();
     const [jwt, setJWT] = useState();
     const [user, userLogged] = useState();
-    const [userInfo, setUserInfo] = useState();
     const [locations, setLocations] = useState();
     const [locationID, setLocationID] = useState(0);
     const [page, setPage] = useState(1);
+    const [modal, setModal] = useState(false);
+    const [reply, setReply] = useState();
+    const [reviewID, setReviewID] = useState();
     
     useEffect(() => {
         getJWT();
         getLocations();
         getReviews();
+        getUsers();
+        getReplies();
     }, [])
     useEffect(() => {
         getUser();
@@ -29,7 +35,10 @@ const Forum = (props) => {
         }
     }, [user])
     useEffect(() => {
-    }, [page, locationID])
+    }, [page, locationID, reviews, replies])
+    useEffect(() => {
+        getReplies();
+    }, [modal])
     
     function getJWT() {
         const jwt = localStorage.getItem('token');
@@ -41,18 +50,14 @@ const Forum = (props) => {
             userLogged(user);
         } catch {}
     }
-  
+
     const getUserInfo = async () => {
-      let pk = user.user_id;
-      const userInfo = await axios.get(`http://127.0.0.1:8000/api/auth/user/${pk}`, { headers: { Authorization: `Bearer ${jwt}` } });
-      if(userInfo) {
-          setUserInfo(userInfo.data);
-      } else {console.log('no user found')}
-    }
-    
-    function refreshPage() {
-      window.location.reload();
-    }
+        let pk = user.user_id;
+        const userInfo = await axios.get(`http://127.0.0.1:8000/api/auth/user/${pk}`, { headers: { Authorization: `Bearer ${jwt}` } });
+        if(userInfo) {
+            setUserInfo(userInfo.data);
+        } else {console.log('no user found')}
+      }
 
     const getLocations = async () => {
         const locationList = await axios.get(`http://127.0.0.1:8000/locations/`);
@@ -62,10 +67,43 @@ const Forum = (props) => {
       }
 
     const getReviews = async () => {
-    const locationList = await axios.get(`http://127.0.0.1:8000/reviews/`);
-    if(locationList) {
-        setReviews(locationList.data);
+    const reviewList = await axios.get(`http://127.0.0.1:8000/reviews/`);
+    if(reviewList) {
+        setReviews(reviewList.data);
     } else { }
+    }
+
+    const getReplies = async () => {
+        const replyList = await axios.get(`http://127.0.0.1:8000/replies/`);
+        if(replyList) {
+            setReplies(replyList.data);
+        } else { }
+        }
+
+    const getUsers = async () => {
+        const users = await axios.get(`http://127.0.0.1:8000/api/auth/users/`);
+        if(users) {
+            setUsers(users.data);
+        } else { }
+      }
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        let Reply = {
+            'diver_pk': userInfo.id,
+            'reply': reply,
+            'review_pk': reviewID
+        }
+        let response = await axios.post(`http://127.0.0.1:8000/replies/`, Reply);
+        console.log(response.data);
+        if (response) {
+            setModal(false);
+        }
+    }
+
+    function setupModal(review) {
+        setModal(true);
+        setReviewID(review.id);
     }
 
     return ( 
@@ -241,30 +279,83 @@ const Forum = (props) => {
                     </li>
                     </ul>
                     }
+                    {reviews && users && replies ?
                 <table className="table table-hover">
                     <thead>
                         <tr className='table-dark'>
-                        <th scope="col">User</th>
-                        <th scope="col">Rating</th>
-                        <th scope="col">Review</th>
+                        <th scope="col">Forum</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr className="table-primary">
-                        <th scope="row">Primary</th>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        </tr>
-                        <tr className="table-light">
-                        <th scope="row">Light</th>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        </tr>
-                    </tbody>
+                    {reviews.map((review) => (
+                        review.location_pk === locations[locationID].id ?
+                            <tbody>
+                                <tr className="table-light">
+                                    {users.map((user) => {
+                                        if (user.id === review.diver_pk) {
+                                            return (
+                                                <td>{user.username}'s Review:</td>
+                                            )
+                                        }                                      
+                                    })}
+                                <td>{review.review}</td>
+                                <td>{review.stars}/5</td>
+                                <td><button className="btn btn-primary" onClick={() => setupModal(review)}>Reply</button></td>
+                                </tr>
+                                {replies.map((reply) => {
+                                  if (reply.review_pk === review.id) {
+                                      return (
+                                        <tr className="table-light">
+                                                {users.map((user) => {
+                                            if (user.id === reply.diver_pk) {
+                                                return (
+                                                    <td>{user.username} Replied:</td>
+                                                )
+                                            }                                      
+                                        })}
+                                            <td>{reply.reply}</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                      )
+                                  }  
+                                })}
+                            </tbody>
+                        :
+                        <React.Fragment></React.Fragment>
+                    ))}
                     </table>
+                :
+                <div></div>    
+                }   
                 </div>
 
             </div>
+            <Modal open={modal} onClose={() => setModal(false)} >
+                <br />
+                <form onSubmit={handleSubmit}>
+                        <fieldset>
+                            <legend>Write Reply</legend>
+                            <div className="form-group">
+                                <label className="form-label mt-4">Reply</label>
+                                <div className="form-floating mb-3">
+                                    <input type="text" 
+                                    className="form-control" 
+                                    name="reply"
+                                    id="floatingInput" 
+                                    placeholder="Username" 
+                                    onChange={(e) => setReply(e.target.value)}/>
+                                    <label for="floatinInput">Reply</label>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" className="btn btn-primary">Submit</button>
+                            </div>
+                        </fieldset>
+                    </form>
+            </Modal>
         </div>
      );
 }

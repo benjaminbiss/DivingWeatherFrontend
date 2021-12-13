@@ -78,7 +78,7 @@ const NavBar = (props) => {
               :
               <ul className="navbar-nav me-auto">
               <li className="nav-item">
-                <a className="nav-link" href="/trips">Plan a Trip</a>
+                <a className="nav-link" href="/trips">View Trips</a>
               </li>
               <li className="nav-item">
               <a className="nav-link" href="/marker">New Map Marker</a>

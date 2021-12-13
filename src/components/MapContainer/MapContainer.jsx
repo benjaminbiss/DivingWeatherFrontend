@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react/cjs/react.development';
 import axios from 'axios';
 import ModalForm from '../ModalForm/ModalForm';
 import jwtDecode from 'jwt-decode';
+import { Modal } from 'react-responsive-modal';
 
 const MapContainer = (props) => {
 
@@ -17,7 +18,11 @@ const MapContainer = (props) => {
   const [jwt, setJWT] = useState();
   const [user, userLogged] = useState();
   const [userInfo, setUserInfo] = useState();
-  
+  const [toggleReview, toggleReviewDisplay] = useState(false);
+  const [review, setReview] = useState();
+  const [rating, setRating] = useState();
+  const [diveID, setDiveID] = useState();
+
   useEffect(() => {
       getJWT();
   }, [])
@@ -30,7 +35,7 @@ const MapContainer = (props) => {
       }
   }, [user])
   useEffect(() =>{
-    console.log(selectedDive)
+    getDiveID();
   }, [selectedDive])
   
   function getJWT() {
@@ -75,6 +80,33 @@ const MapContainer = (props) => {
       setDate(0)
     }
   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let Review = {
+        'diver_pk': userInfo.id,
+        'review': review,
+        'location_pk': diveID,
+        'stars': rating
+    }
+    console.log(Review)
+    let response = await axios.post(`http://127.0.0.1:8000/reviews/`, Review);
+    console.log(response.data);
+    if (response) {
+      toggleReviewDisplay(false);
+    }
+}
+
+function getDiveID() {
+  selectedDive ?
+  props.locations.map((location) => {
+    if(location.name === selectedDive.name) {
+      setDiveID(location.id)
+      }
+  })
+  :
+  console.log('no dive selected')
+}
 
   const mapStyles = {        
     height: "90vh",
@@ -175,6 +207,7 @@ const MapContainer = (props) => {
                 <p></p>
               }
                 <button type="button" class="btn btn-secondary" onClick={() => toggleDisplay(true)}>Plan a Trip Here</button>
+                <button type="button" class="btn btn-secondary" onClick={() => toggleReviewDisplay(true)}>Leave a Review for the Dive Location</button>
                 </div>                
               :
               <div></div>}
@@ -188,6 +221,38 @@ const MapContainer = (props) => {
             :
             <div></div>
             }
+            <Modal open={toggleReview} onClose={() => toggleReviewDisplay(false)} >
+              <br />
+              <form onSubmit={handleSubmit}>
+                <fieldset>
+                    <legend>Write Review</legend>
+                    <div className="form-group">
+                        <label className="form-label mt-4">Review</label>
+                        <div className="form-floating mb-3">
+                            <input type="text" 
+                            className="form-control" 
+                            name="review"
+                            id="floatingInput" 
+                            placeholder="review" 
+                            onChange={(e) => setReview(e.target.value)}/>
+                            <label for="floatinInput">Review</label>
+                        </div>
+                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                          <div class="btn-group me-2" role="group" aria-label="First group">
+                            <button type="button" class="btn btn-secondary" onClick={() => setRating(1)}>1</button>
+                            <button type="button" class="btn btn-secondary" onClick={() => setRating(2)}>2</button>
+                            <button type="button" class="btn btn-secondary" onClick={() => setRating(3)}>3</button>
+                            <button type="button" class="btn btn-secondary" onClick={() => setRating(4)}>4</button>
+                            <button type="button" class="btn btn-secondary" onClick={() => setRating(5)}>5</button>
+                          </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" className="btn btn-primary">Submit</button>
+                    </div>
+                </fieldset>
+            </form>
+            </Modal>
             </React.Fragment>
   )
 }

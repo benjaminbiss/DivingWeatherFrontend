@@ -42,7 +42,7 @@ const Splash = (props) => {
         <div>
             <NavBar />
             <div className="map_containter">
-                <MapContainer markers={stateMarkers}/>
+                <MapContainer markers={stateMarkers} locations={locations}/>
             </div>
         </div>
      );
