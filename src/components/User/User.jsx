@@ -64,6 +64,7 @@ const User = (props) => {
                     <p className="lead">Email: {userInfo.email}</p>
                     <p className="lead">First Name: {userInfo.first_name}</p>
                     <p className="lead">Last Name: {userInfo.last_name}</p>
+                    <p className="lead">Password: {userInfo.password}</p>
                     </div>}
                     <br />
                     <Link to="/">Return to main page</Link>

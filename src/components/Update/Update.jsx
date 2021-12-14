@@ -58,6 +58,7 @@ const User = (props) => {
             'first_name': firstName,
             'last_name': lastName,
             'middle_name': middleName,
+            'password': password
         }
         let pk = user.user_id;
         let response = await axios.put(`http://127.0.0.1:8000/api/auth/user/${pk}`, userUpdate, { headers: { Authorization: `Bearer ${jwt}` } });
@@ -123,6 +124,18 @@ const User = (props) => {
                                         placeholder="Smith" 
                                         onChange={(e) => setLName(e.target.value)}/>
                                         <label for="floatinInput">Last Name</label>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label mt-4">Password</label>
+                                    <div className="form-floating mb-3">
+                                        <input type="text" 
+                                        className="form-control" 
+                                        name="password"
+                                        id="floatingInput" 
+                                        placeholder="Smith" 
+                                        onChange={(e) => setPassword(e.target.value)}/>
+                                        <label for="floatinInput">Password</label>
                                     </div>
                                 </div>
                                 <div>
